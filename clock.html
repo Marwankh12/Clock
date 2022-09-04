@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div class="content">
+    <div class="xr">
+<div class="clock">
+    <span class="num" style="--i:1"><b>1</b></span>
+    <span class="num" style="--i:2"><b>2</b></span>
+    <span class="num" style="--i:3"><b>3</b></span>
+    <span class="num" style="--i:4"><b>4</b></span>
+    <span class="num" style="--i:5"><b>5</b></span>
+    <span class="num" style="--i:6"><b>6</b></span>
+    <span class="num" style="--i:7"><b>7</b></span>
+    <span class="num" style="--i:8"><b>8</b></span>
+    <span class="num" style="--i:9"><b>9</b></span>
+    <span class="num" style="--i:10"><b>10</b></span>
+    <span class="num" style="--i:11"><b>11</b></span>
+    <span class="num" style="--i:12"><b>12</b></span>
+    <div class="hr" id="hr"></div>
+    <div class="sc" id="sc"></div>
+    <div class="mn" id="mn"></div>
+</div>
+<div class="digital"> <span class="h" id="h"></span> : <span class="m" id="m"></span> : <span class="s" id="s"> </span> &MediumSpace; <span class="ampm" id="ampm"> AM </span></div>
+</div>
+</div>
+    <style>
+body{
+    padding: 0;
+    margin:0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222;
+    font-family: monospace;
+}
+.content{
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+.clock{
+    height: 350px;
+    width: 350px;
+  background-color: #353b48;
+   display: flex;
+   align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative;
+    justify-items:center ;
+}
+.clock::before{
+content: '';
+height: 8px;
+width: 8px;
+border-radius: 50%;
+border: 3px solid #fff;
+/* position: absolute; */
+top: 50%;
+}
+.num{
+    position: absolute;
+    color: white;
+    text-align: center;
+    inset: 15px;
+ transform: rotate(calc(var(--i) * 30deg));
+}
+.num b{
+    font-size: 24px;
+
+}
+.hr , .sc , .mn{
+    display: flex;
+    justify-content: center;
+    position: absolute;
+}
+.hr{
+    height: 160px;
+    width: 160px;
+}
+.mn{
+    height: 190px;
+    width: 190px;
+}
+.sc{
+    height: 230px;
+    width:230px;
+}
+.hr::before{
+    content: '';
+    background-color: #eb3b5a;
+    height: 60px;
+    width: 6px;
+    position:relative;
+    border-radius: 15%;
+  transform:translate(8% , 36%) ;  
+}
+ .mn::before{
+    content: '';
+    background-color: #20bf6b;
+    height: 90px;
+    width: 3px;
+    position:relative;
+    border-radius: 15%;
+} 
+ .sc::before{
+    content: '';
+    background-color: #006ad4;
+    height: 120px;
+    width: 2px;
+    position:relative;
+    border-radius: 15%;
+} 
+.digital{
+    background-color: #282d38;
+    height: 30px;
+    width: 150px ;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content:center;
+}
+.h{
+color: #eb3b5a;
+}
+.m{
+    color: #20bf6b;
+}
+.s{
+    color: #006ad4
+}
+
+.xr{
+    background-color: #353b48;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    </style>
+    <script>
+ let hr = document.querySelector('#hr')
+ let mn = document.querySelector('#mn')
+ let sc = document.querySelector('#sc')
+ let h = document.querySelector('#h')
+ let m = document.querySelector('#m')
+ let s = document.querySelector('#s')
+ let ampm= document.querySelector('#ampm')
+setInterval(
+    () => {
+    let date = new Date()
+ let hours = date.getHours()
+ let minutes = date.getMinutes()
+ let seconds = date.getSeconds()
+hr.style.transform = `rotate(${hours/12 *360}deg)`
+mn.style.transform = `rotate(${minutes/60 *360}deg)`
+sc.style.transform = `rotate(${seconds/60 *360}deg)`
+
+ 
+let hou = new Date().getHours()
+let min = new Date().getMinutes()
+let sec = new Date().getSeconds()
+h.innerHTML = hou
+m.innerHTML = min
+s.innerHTML = sec
+ if(hou > 12){
+    ampm.innerHTML = 'PM'
+    h.innerHTML = hou-12
+    
+ }
+ else{
+    ampm.innerHTML = 'AM'
+    h.innerHTML = hou
+ }
+ hou<10? '0'+ h.innerHTML : h.innerHTML
+ min<10? '0'+ m.innerHTML : m.innerHTML
+ sec<10? '0'+ s.innerHTML : s.innerHTML
+}
+ )
+ 
+   
+
+ 
+ 
+
+    </script>
+</body>
+</html>
